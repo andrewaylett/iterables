@@ -46,8 +46,7 @@ public class CountingIterable<T> implements Iterable<Value<T>> {
 
             @Override
             public void remove() {
-                // TODO Auto-generated method stub
-
+                it.remove();
             }
         };
     }

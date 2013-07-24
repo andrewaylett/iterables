@@ -5,6 +5,7 @@ import static com.scottlogic.aaylett.iterables.CountingIterable.countingIterable
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.junit.Test;
@@ -40,6 +41,26 @@ public class CountingIterableTest {
             assertTrue("Iteration Value", v.getValue() == list.get(i++));
         }
         assertTrue("Total number of iterations", i == list.size());
+    }
+
+    @Test
+    public void testRemoveWorks() {
+        List<Integer> list = newNumberList();
+        int oldSize = list.size();
+        List<Integer> oldList = newArrayList(list);
+        Iterator<Value<Integer>> it = countingIterable(list).iterator();
+        while (it.hasNext()) {
+            Value<Integer> v = it.next();
+            if (v.getCount() % 2 != 0) {
+                it.remove();
+            }
+        }
+
+        assertTrue("Removed the right number of objects", list.size() == oldSize/2);
+
+        for (int i=0; i < list.size(); i++) {
+            assertTrue(list.get(i).equals(oldList.get(i * 2)));
+        }
     }
 
     private ArrayList<Integer> newNumberList() {
