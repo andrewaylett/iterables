@@ -1,7 +1,7 @@
 package com.scottlogic.aaylett.iterables;
 
 import static com.google.common.collect.Lists.newArrayList;
-import static com.scottlogic.aaylett.iterables.CountingIterable.countingIterable;
+import static com.scottlogic.aaylett.iterables.Counting.counting;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
@@ -15,7 +15,7 @@ public class CountingIterableTest {
     @Test
     public void testTypesExist() {
         Iterable<String> it = newArrayList();
-        for (Value<String> v : countingIterable(it)) {
+        for (Value<String> v : counting(it)) {
             @SuppressWarnings("unused")
             long l = v.getCount();
             @SuppressWarnings("unused")
@@ -27,7 +27,7 @@ public class CountingIterableTest {
     public void testNumbersReturnedInSequence() {
         List<Integer> list = newNumberList();
         int i = 0;
-        for (Value<Integer> v : countingIterable(list)) {
+        for (Value<Integer> v : counting(list)) {
             assertTrue("Iteration Count", v.getCount() == i++);
         }
         assertTrue("Total number of iterations", i == list.size());
@@ -37,7 +37,7 @@ public class CountingIterableTest {
     public void testObjectsReturnedInSequence() {
         List<Integer> list = newNumberList();
         int i = 0;
-        for (Value<Integer> v : countingIterable(list)) {
+        for (Value<Integer> v : counting(list)) {
             assertTrue("Iteration Value", v.getValue() == list.get(i++));
         }
         assertTrue("Total number of iterations", i == list.size());
@@ -48,7 +48,7 @@ public class CountingIterableTest {
         List<Integer> list = newNumberList();
         int oldSize = list.size();
         List<Integer> oldList = newArrayList(list);
-        Iterator<Value<Integer>> it = countingIterable(list).iterator();
+        Iterator<Value<Integer>> it = counting(list.iterator());
         while (it.hasNext()) {
             Value<Integer> v = it.next();
             if (v.getCount() % 2 != 0) {
