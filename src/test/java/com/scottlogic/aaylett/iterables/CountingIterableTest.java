@@ -15,7 +15,7 @@ public class CountingIterableTest {
     @Test
     public void testTypesExist() {
         Iterable<String> it = newArrayList();
-        for (Value<String> v : counting(it)) {
+        for (Counted<String> v : counting(it)) {
             @SuppressWarnings("unused")
             long l = v.getCount();
             @SuppressWarnings("unused")
@@ -27,7 +27,7 @@ public class CountingIterableTest {
     public void testNumbersReturnedInSequence() {
         List<Integer> list = newNumberList();
         int i = 0;
-        for (Value<Integer> v : counting(list)) {
+        for (Counted<Integer> v : counting(list)) {
             assertTrue("Iteration Count", v.getCount() == i++);
         }
         assertTrue("Total number of iterations", i == list.size());
@@ -37,7 +37,7 @@ public class CountingIterableTest {
     public void testObjectsReturnedInSequence() {
         List<Integer> list = newNumberList();
         int i = 0;
-        for (Value<Integer> v : counting(list)) {
+        for (Counted<Integer> v : counting(list)) {
             assertTrue("Iteration Value", v.getValue() == list.get(i++));
         }
         assertTrue("Total number of iterations", i == list.size());
@@ -48,9 +48,9 @@ public class CountingIterableTest {
         List<Integer> list = newNumberList();
         int oldSize = list.size();
         List<Integer> oldList = newArrayList(list);
-        Iterator<Value<Integer>> it = counting(list.iterator());
+        Iterator<Counted<Integer>> it = counting(list.iterator());
         while (it.hasNext()) {
-            Value<Integer> v = it.next();
+            Counted<Integer> v = it.next();
             if (v.getCount() % 2 != 0) {
                 it.remove();
             }

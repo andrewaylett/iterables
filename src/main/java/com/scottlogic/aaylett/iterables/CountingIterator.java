@@ -1,13 +1,15 @@
 package com.scottlogic.aaylett.iterables;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import java.util.Iterator;
 
-public final class CountingIterator<T> implements Iterator<Value<T>> {
+public final class CountingIterator<T> implements Iterator<Counted<T>> {
     private final Iterator<T> it;
-    long count = 0;
+    private long count = 0;
 
     public CountingIterator(Iterator<T> it) {
-        this.it = it;
+        this.it = checkNotNull(it);
     }
 
     @Override
@@ -16,11 +18,11 @@ public final class CountingIterator<T> implements Iterator<Value<T>> {
     }
 
     @Override
-    public Value<T> next() {
+    public Counted<T> next() {
         final long currentCount = count++;
         final T currentValue = it.next();
-        return new Value<T>() {
 
+        return new Counted<T>() {
             @Override
             public long getCount() {
                 return currentCount;
@@ -30,7 +32,6 @@ public final class CountingIterator<T> implements Iterator<Value<T>> {
             public T getValue() {
                 return currentValue;
             }
-
         };
     }
 

@@ -7,11 +7,11 @@ public final class Counting {
         // Deliberately Blank
     }
 
-    public static <T> CountingIterable<T> counting(Iterable<T> iterable) {
+    public static <T> Iterable<Counted<T>> counting(Iterable<T> iterable) {
         return new CountingIterable<>(iterable);
     }
 
-    public static <T> CountingIterator<T> counting(Iterator<T> iterator) {
+    public static <T> Iterator<Counted<T>> counting(Iterator<T> iterator) {
         return new CountingIterator<>(iterator);
     }
 }

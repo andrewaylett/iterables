@@ -1,7 +1,7 @@
 package com.scottlogic.aaylett.iterables;
 
 
-public class CountingIterable<T> implements Iterable<Value<T>> {
+public class CountingIterable<T> implements Iterable<Counted<T>> {
 
     private final Iterable<T> iterable;
 

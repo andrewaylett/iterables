@@ -1,6 +1,6 @@
 package com.scottlogic.aaylett.iterables;
 
-public interface Value<T> {
+public interface Counted<T> {
     long getCount();
     T getValue();
 }
